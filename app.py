@@ -1,19 +1,28 @@
 import streamlit as st
-import gspread
 import time
+import gspread
 from googleapiclient.discovery import build
 from googleapiclient.errors import HttpError
 from oauth2client.service_account import ServiceAccountCredentials
 from datetime import datetime, timedelta
 import json
+import requests
 
-# 📌 Ta clé API sous forme de dictionnaire (Évite de l'exposer en public !)
-creds_json = json.loads(st.secrets["SERVICE_ACCOUNT_JSON"])
+SERVICE_ACCOUNT_JSON = json.loads(st.secrets["google_service_account"]["credentials"])  # ✅ Correct JSON parsing
 
-# Authenticate Google API
-scope = ["https://spreadsheets.google.com/feeds", "https://www.googleapis.com/auth/drive"]
-creds = ServiceAccountCredentials.from_json_keyfile_dict(creds_json, scope)
+# 🔹 Fix private_key formatting
+SERVICE_ACCOUNT_JSON["private_key"] = SERVICE_ACCOUNT_JSON["private_key"].replace("\\n", "\n")
 
+MAKE_API_KEY = st.secrets["MAKE_API_KEY"]
+SPREADSHEET_ID = st.secrets["SPREADSHEET_ID"]
+SCENARIO_ID = st.secrets["SCENARIO_ID"]
+
+scope = [
+    "https://spreadsheets.google.com/feeds",
+    "https://www.googleapis.com/auth/drive",
+    "https://www.googleapis.com/auth/documents.readonly"
+]
+creds = ServiceAccountCredentials.from_json_keyfile_dict(SERVICE_ACCOUNT_JSON, scope)
 client = gspread.authorize(creds)
 
 # 📌 Google Drive API

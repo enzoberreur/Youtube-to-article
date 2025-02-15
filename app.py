@@ -33,7 +33,7 @@ SPREADSHEET_ID = "1YXsVRezFHrjBvgsgC0vwV-_meN4sB6n2VwG0nQsRvr8"
 sheet = client.open_by_key(SPREADSHEET_ID).sheet1
 
 # 📌 Streamlit UI
-st.title("🚀 YouTube Link → Google Sheets → Google Doc Retrieval")
+st.title("YouTube To Article")
 
 # 📌 Input Field for YouTube Link
 youtube_link = st.text_input("🔗 Enter a YouTube Link:", "")
@@ -106,15 +106,15 @@ def get_doc_id_for_last_link(row_number):
         return None
 
 
-if st.button("📩 Add & Retrieve Google Doc"):
+if st.button("📩 Generate an article"):
     if youtube_link:
-        st.write("✅ Adding YouTube link to Google Sheets...")
+        st.write("✅ Convert Youtube video to text")
         row_number = add_link_to_sheet(youtube_link)
 
         if not row_number:
             st.error("⚠️ Error adding link to Google Sheets.")
         else:
-            st.write(f"🔍 Waiting for Google Doc ID in row {row_number}...")
+            st.write(f"🔍 Waiting for Google Doc to be created...")
 
             start_time = time.time()
             doc_link = None
@@ -127,7 +127,7 @@ if st.button("📩 Add & Retrieve Google Doc"):
                 time.sleep(10)  # Wait 10 seconds before retrying
 
             if doc_link:
-                st.success(f"📄 Google Doc found: [Open Document]({doc_link})")
+                st.success(f"📄 Google Doc: [Open Document]({doc_link})")
             else:
                 st.warning("⚠️ No Google Doc ID found in Sheets. Please wait or try again.")
     else:

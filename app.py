@@ -151,7 +151,7 @@ def add_link_to_sheet(youtube_link):
         new_row_number = last_filled_row + 1  # Next available row
 
         # Add YouTube link to the correct row
-        sheet.update(f"A{new_row_number}", [[youtube_link]])
+        sheet.update(f"A{new_row_number}:C{new_row_number}", [[youtube_link, "", user_id]])  # Add YouTube link & User ID
 
         print(f"✅ YouTube link added to row {new_row_number}")
 

@@ -114,7 +114,7 @@ if st.button("📩 Generate an article"):
         if not row_number:
             st.error("⚠️ Error adding link to Google Sheets.")
         else:
-            st.write(f"🔍 Waiting for Google Doc to be created...")
+            st.write(f"🔍 Waiting for Google Doc to be created... (30 to 60 seconds)")
 
             start_time = time.time()
             doc_link = None

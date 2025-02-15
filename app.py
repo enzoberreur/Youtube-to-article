@@ -28,6 +28,7 @@ client = gspread.authorize(creds)
 
 # 📌 Google Drive API
 drive_service = build("drive", "v3", credentials=creds)
+docs_service = build("docs", "v1", credentials=creds)
 
 # 📌 Google Sheets Info
 SPREADSHEET_ID = "1YXsVRezFHrjBvgsgC0vwV-_meN4sB6n2VwG0nQsRvr8"

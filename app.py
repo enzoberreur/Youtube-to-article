@@ -92,7 +92,7 @@ def fetch_user_history():
         ]
 
         # Keep only last 5 entries
-        return user_history[-5:]
+        return user_history[-10:]
     except Exception as e:
         st.sidebar.error(f"Error loading history: {e}")
         return []

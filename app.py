@@ -35,7 +35,7 @@ SPREADSHEET_ID = "1YXsVRezFHrjBvgsgC0vwV-_meN4sB6n2VwG0nQsRvr8"
 sheet = client.open_by_key(SPREADSHEET_ID).sheet1
 
 # 📌 Streamlit UI
-st.title("YouTube To Article")
+st.title("YouTube To Article 📝")
 
 # 📌 Generate or Retrieve Unique User ID from Local Storage
 user_id = streamlit_js_eval(js_expressions="localStorage.getItem('user_id') || (localStorage.setItem('user_id', Math.random().toString(36).substr(2, 9)), localStorage.getItem('user_id'))", key="user_id")

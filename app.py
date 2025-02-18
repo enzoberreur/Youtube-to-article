@@ -36,7 +36,7 @@ sheet = client.open_by_key(SPREADSHEET_ID).sheet1
 
 st.markdown(
     """
-    <div style="text-align: center; margin-bottom: 50px; font-size: 12px;">
+    <div style="text-align: center; margin-bottom: 100px; font-size: 15px;">
          Find me on <a href="https://www.linkedin.com/in/enzo-berreur/" target="_blank">LinkedIn</a>
     </div>
     """,

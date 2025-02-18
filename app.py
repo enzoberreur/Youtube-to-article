@@ -34,6 +34,14 @@ docs_service = build("docs", "v1", credentials=creds)
 SPREADSHEET_ID = "1YXsVRezFHrjBvgsgC0vwV-_meN4sB6n2VwG0nQsRvr8"
 sheet = client.open_by_key(SPREADSHEET_ID).sheet1
 
+st.markdown(
+    """
+    <div style="text-align: center; margin-bottom: 20px; font-size: 18px;">
+        🌟 Find me on <a href="https://www.linkedin.com/in/enzo-berreur/" target="_blank">LinkedIn</a> 🌟
+    </div>
+    """,
+    unsafe_allow_html=True
+)
 # 📌 Streamlit UI
 st.title("📝 YouTube To Article")
 

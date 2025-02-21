@@ -184,21 +184,17 @@ def get_doc_id_for_last_link(row_number):
         st.error(f"Error retrieving Google Doc ID: {e}")
         return None
 
-def get_last_column_d_value():
+def get_last_column_d_value(row_number):
     """
     Retrieves the last value from column D of the sheet.
     """
     try:
-        all_values = sheet.col_values(4)  # Column D values
-        if all_values:
-            return all_values[-1]  # Return the last value
-        else:
-            return "No data in column D."
+        cell_value = sheet.cell(row_number, 4).value  # Column B (Google Doc ID)
+        return cell_value if cell_value else None
     except Exception as e:
         st.error(f"Error retrieving data from column D: {e}")
         return None
     
-last_value_d = get_last_column_d_value()
 
 
 if st.button("📩 Generate an article"):
@@ -216,13 +212,15 @@ if st.button("📩 Generate an article"):
 
             while time.time() - start_time < 300:  # Check for up to 5 minutes
                 google_doc_id = get_doc_id_for_last_link(row_number)
+                rate = get_last_column_d_value(row_number)
                 if google_doc_id and google_doc_id.strip():
                     doc_link = f"https://docs.google.com/document/d/{google_doc_id}"
+
                     break
                 time.sleep(10)  # Wait 10 seconds before retrying
 
             if doc_link:
-                st.success(f"📄 Google Doc: [Open Document]({doc_link}) | 🎓 Grade: {last_value_d}/20")
+                st.success(f"📄 Google Doc: [Open Document]({doc_link}) | 🎓 Grade: {rate}/20")
             else:
                 st.warning("⚠️ No Google Doc ID found in Sheets. Please wait or try again.")
     else:

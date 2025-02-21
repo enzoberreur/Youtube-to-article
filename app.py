@@ -36,7 +36,7 @@ sheet = client.open_by_key(SPREADSHEET_ID).sheet1
 
 st.markdown(
     """
-    <div style="text-align: center; margin-top 5px; font-size: 15px;">
+    <div style="text-align: center; font-size: 15px;">
          Find me on <a href="https://www.linkedin.com/in/enzo-berreur/" target="_blank">LinkedIn</a>
     </div>
     """,
@@ -184,6 +184,28 @@ def get_doc_id_for_last_link(row_number):
         st.error(f"Error retrieving Google Doc ID: {e}")
         return None
 
+def get_last_column_d_value():
+    """
+    Retrieves the last value from column D of the sheet.
+    """
+    try:
+        all_values = sheet.col_values(4)  # Column D values
+        if all_values:
+            return all_values[-1]  # Return the last value
+        else:
+            return "No data in column D."
+    except Exception as e:
+        st.error(f"Error retrieving data from column D: {e}")
+        return None
+
+# Fetch and display the last value from column D
+if doc_link:
+    # Fetch the latest grade from column D
+    last_value_d = get_last_column_d_value()
+    grade_display = f"Grade: {last_value_d}/20" if last_value_d else "Grade: Not available"
+
+    # Display both the Google Doc link and the grade together
+    st.success(f"📄 Google Doc: [Open Document]({doc_link}) | 🎓 {grade_display}")
 
 if st.button("📩 Generate an article"):
     if youtube_link:
